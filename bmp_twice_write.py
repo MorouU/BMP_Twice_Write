@@ -50,7 +50,10 @@ def BMP( width: int = 256, height: int = 256, color: tuple = (-1, -1, -1), hideS
         for col in range(width):
             if Write:
                 if len(String_part) != 0:
-                    Color_part += "".join(each for each in String_part.pop(0)).zfill(3)
+                    stringPart = String_part.pop(0)
+                    if len(stringPart) < 3:
+                        stringPart += "\x00" * (3 - len(stringPart))
+                    Color_part += stringPart
                     continue
                 else:
                     Write = False
